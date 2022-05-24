@@ -1,9 +1,13 @@
 
-let racecar = {
-  direction: 'east'
-};
-
 let carImage = document.querySelector('img');
+
+let racecar = {
+  direction: 'east',
+  location: {
+    x: carImage.style.left,
+    y: carImage.style.top,
+  }
+};
 
 document.addEventListener('keydown', event => {
   switch (event.key) {
