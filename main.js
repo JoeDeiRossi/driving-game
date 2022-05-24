@@ -6,7 +6,8 @@ let racecar = {
   location: {
     x: carImage.style.left,
     y: carImage.style.top,
-  }
+  },
+  engineOn: false
 };
 
 document.addEventListener('keydown', event => {
@@ -29,5 +30,16 @@ document.addEventListener('keydown', event => {
       break;
     default:
       break;
+  }
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key === ' ' && !racecar.engineOn) {
+    racecar.engineOn = true;
+    const intervalID = setInterval(() => {
+      let newXCoordinate = parseInt(carImage.style.left.slice(0, -2)) + 5;
+      carImage.style.left = newXCoordinate + 'px';
+      racecar.location.x = carImage.style.left;
+    }, 16)
   }
 })
