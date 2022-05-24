@@ -7,7 +7,8 @@ let racecar = {
     x: carImage.style.left,
     y: carImage.style.top,
   },
-  engineOn: false
+  engineOn: false,
+  intervalID: null
 };
 
 document.addEventListener('keydown', event => {
@@ -34,12 +35,16 @@ document.addEventListener('keydown', event => {
 });
 
 document.addEventListener('keydown', event => {
-  if (event.key === ' ' && !racecar.engineOn) {
-    racecar.engineOn = true;
-    const intervalID = setInterval(() => {
-      let newXCoordinate = parseInt(carImage.style.left.slice(0, -2)) + 5;
-      carImage.style.left = newXCoordinate + 'px';
-      racecar.location.x = carImage.style.left;
-    }, 16)
+  if (event.key === ' ') {
+    racecar.engineOn = !racecar.engineOn;
+    if (racecar.engineOn) {
+      racecar.intervalID = setInterval(() => {
+        let newXCoordinate = parseInt(carImage.style.left.slice(0, -2)) + 5;
+        carImage.style.left = newXCoordinate + 'px';
+        racecar.location.x = carImage.style.left;
+      }, 16)
+    } else {
+      clearInterval(racecar.intervalID);
+    }
   }
 })
