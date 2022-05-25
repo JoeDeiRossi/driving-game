@@ -38,10 +38,29 @@ document.addEventListener('keydown', event => {
   if (event.key === ' ') {
     racecar.engineOn = !racecar.engineOn;
     if (racecar.engineOn) {
+      let newCoordinate;
       racecar.intervalID = setInterval(() => {
-        let newXCoordinate = parseInt(carImage.style.left.slice(0, -2)) + 5;
-        carImage.style.left = newXCoordinate + 'px';
-        racecar.location.x = carImage.style.left;
+        switch (racecar.direction) {
+          case 'south':
+            newCoordinate = parseInt(carImage.style.top.slice(0, -2)) + 5;
+            carImage.style.top = newCoordinate + 'px';
+            racecar.location.y = carImage.style.top;
+            break;
+          case 'west':
+            newCoordinate = parseInt(carImage.style.left.slice(0, -2)) - 5;
+            carImage.style.left = newCoordinate + 'px';
+            racecar.location.x = carImage.style.left;
+            break;
+          case 'north':
+            newCoordinate = parseInt(carImage.style.top.slice(0, -2)) - 5;
+            carImage.style.top = newCoordinate + 'px';
+            racecar.location.y = carImage.style.top;
+            break;
+          default:
+            newCoordinate = parseInt(carImage.style.left.slice(0, -2)) + 5;
+            carImage.style.left = newCoordinate + 'px';
+            racecar.location.x = carImage.style.left;
+        }
       }, 16)
     } else {
       clearInterval(racecar.intervalID);
