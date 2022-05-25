@@ -8,15 +8,3 @@ img {
   transition: transform 0.2s;
   position: absolute;
 }
-
-.south {
-  transform: rotate(90deg);
-}
-
-.west {
-  transform: rotate(180deg);
-}
-
-.north {
-  transform: rotate(-90deg);
-}

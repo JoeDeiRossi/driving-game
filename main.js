@@ -11,27 +11,64 @@ let racecar = {
   intervalID: null
 };
 
+function turnLeft() {
+  return parseInt(carImage.style.transform.slice(7, -4)) - 90;
+}
+
+function turnRight() {
+  return parseInt(carImage.style.transform.slice(7, -4)) + 90;
+}
+
+function turnAround() {
+  return parseInt(carImage.style.transform.slice(7, -4)) + 180;
+}
+
 document.addEventListener('keydown', event => {
+  let currentDirection = racecar.direction;
+  let newTransform;
   switch (event.key) {
     case 'ArrowUp':
-      carImage.className = 'north';
+      if (currentDirection === 'west') {
+        newTransform = turnRight();
+      } else if (currentDirection === 'east') {
+        newTransform = turnLeft();
+      } else if (currentDirection === 'south') {
+        newTransform = turnAround();
+      }
       racecar.direction = 'north';
       break;
     case 'ArrowDown':
-      carImage.className = 'south';
+      if (currentDirection === 'east') {
+        newTransform = turnRight();
+      } else if (currentDirection === 'west') {
+        newTransform = turnLeft();
+      } else if (currentDirection === 'north') {
+        newTransform = turnAround();
+      }
       racecar.direction = 'south';
       break;
     case 'ArrowLeft':
-      carImage.className = 'west';
+      if (currentDirection === 'south') {
+        newTransform = turnRight();
+      } else if (currentDirection === 'north') {
+        newTransform = turnLeft();
+      } else if (currentDirection === 'east') {
+        newTransform = turnAround();
+      }
       racecar.direction = 'west';
       break;
     case 'ArrowRight':
-      carImage.className = 'east';
+      if (currentDirection === 'north') {
+        newTransform = turnRight();
+      } else if (currentDirection === 'south') {
+        newTransform = turnLeft();
+      } else if (currentDirection === 'west') {
+        newTransform = turnAround();
+      }
       racecar.direction = 'east';
       break;
-    default:
-      break;
   }
+  carImage.style.transform = `rotate(${newTransform}deg)`;
 });
 
 document.addEventListener('keydown', event => {
